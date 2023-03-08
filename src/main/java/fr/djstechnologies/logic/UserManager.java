@@ -1,36 +1,46 @@
 package fr.djstechnologies.logic;
 
 import fr.djstechnologies.business.User;
+import fr.djstechnologies.dal.CoupleValue;
+import fr.djstechnologies.dal.DataBaseManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.ResultSet;
 
 public class UserManager {
-  private List<User> users;
-
+    private DataBaseManager bdManager = null;
     public UserManager() {
-        this.loadUsers();
+        this.bdManager = new DataBaseManager();
     }
 
-    public UserManager(List<User> users) {
-        this.users = users;
-    }
+    public User authUser(String login, String pwd){
+        User authUser = null;
+        CoupleValue[] params = new CoupleValue[2];
+        params[0] = new CoupleValue("String",login);
+        params[1] = new CoupleValue("String", pwd);
 
-    private void loadUsers(){
-        this.users = new ArrayList<>();
-        User admin = new User("admin","admin","Diabate","Jean","0102030405");
-        this.users.add(admin);
-        User bernard = new User("jean","js","Bernard","Frederic","0807060504");
-        this.users.add(bernard);
-    }
-
-    public User isAuth(String login, String pwd){
-        User user = null;
-        for (User u: this.users){
-            if (u.getLogin().equals(login) && u.getPwd().equals(pwd)){
-                user = u;
+        ResultSet res = null;
+        try{
+            res = this.bdManager.executePreparedSelect(UserConstant.SELECT_AUTH_USER, params);
+            if (res != null){
+                int id;
+                String nom;
+                String prenom;
+                String telephone;
+                String email;
+                while(res.next()) {
+                    id = res.getInt(1);
+                    nom = res.getString(2);
+                    prenom = res.getString(3);
+                    telephone = res.getString(6);
+                    email = res.getString(7);
+                    authUser = new User(id, login, pwd, nom, prenom, telephone, email);
+                }
             }
+            this.bdManager.closeConn();
+        }catch (Exception e){
+            System.out.println(e);
         }
-        return user;
+        return authUser;
+
     }
 }

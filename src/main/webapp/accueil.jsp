@@ -1,4 +1,4 @@
-<%--
+<%@ page import="fr.djstechnologies.business.User" %><%--
   Created by IntelliJ IDEA.
   User: DJS Technologies
   Date: 07/03/2023
@@ -11,7 +11,10 @@
     <title>Money Transfert</title>
 </head>
 <body>
-<h2>Bienvenu <%= session.getAttribute("nomComplet") %> !</h2>
+<%
+    User currentUser = (User)session.getAttribute("userData");
+%>
+<h2>Bienvenu <%= currentUser.getNomComplet() %> !</h2>
 <br>
 </body>
 </html>

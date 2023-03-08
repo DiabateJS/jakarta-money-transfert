@@ -18,14 +18,14 @@ public class TraiterAuth extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("pwd");
         UserManager userManager = new UserManager();
-        User userAuth = userManager.isAuth(login, password);
+        User userAuth = userManager.authUser(login, password);
         HttpSession session = req.getSession();
 
         if (userAuth != null){
-            session.setAttribute("login",userAuth.getLogin());
-            session.setAttribute("nomComplet",userAuth.getNomComplet());
+            session.setAttribute("userData",userAuth);
             req.getRequestDispatcher("accueil.jsp").forward(req, resp);
         }else{
+            session.setAttribute("msgError","Login ou Mot de passe incorrecte");
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
 

@@ -1,25 +1,34 @@
 package fr.djstechnologies.business;
 
 public class User {
+
+    private long id;
     private String login;
     private String pwd;
     private String nom;
     private String prenom;
     private String telephone;
+    private String email;
 
     public User() {
     }
 
-    public User(String login, String pwd, String nom, String prenom, String telephone) {
+    public User(long id, String login, String pwd, String nom, String prenom, String telephone, String email) {
+        this.id = id;
         this.login = login;
         this.pwd = pwd;
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
+        this.email = email;
     }
 
     public String getNomComplet(){
         return this.getNom()+" "+this.getPrenom();
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -62,14 +71,24 @@ public class User {
         this.telephone = telephone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
+                "id=" + id +
+                ", login='" + login + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

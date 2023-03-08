@@ -12,9 +12,9 @@
 <br>
 <form action="Auth" method="post">
     <label for="login">Login</label>
-    <input name="login" id="login"><br>
+    <input type="text" name="login" id="login"><br>
     <label for="pwd">Password</label>
-    <input name="pwd" id="pwd"><br>
+    <input type="password" name="pwd" id="pwd"><br>
     <input type="submit" value="Valider">
 </form>
 </body>
