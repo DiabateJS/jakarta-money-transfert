@@ -34,10 +34,8 @@ public class DataBaseManager {
         return res;
     }
 
-    public ResultSet executePreparedSelect(String sql, CoupleValue[] params){
-        ResultSet res = null;
+    private PreparedStatement addParametersToPreparedStatement(PreparedStatement preparedStatement, CoupleValue[] params){
         try{
-            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
             CoupleValue currentCouple;
             for (int i = 0 ; i < params.length ; i++){
                 currentCouple = params[i];
@@ -48,11 +46,34 @@ public class DataBaseManager {
                     preparedStatement.setInt(i+1,Integer.parseInt(currentCouple.getValue().toString()));
                 }
             }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return preparedStatement;
+    }
+
+    public ResultSet executePreparedSelect(String sql, CoupleValue[] params){
+        ResultSet res = null;
+        try{
+            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
+            preparedStatement = this.addParametersToPreparedStatement(preparedStatement, params);
             res = preparedStatement.executeQuery();
         }catch(Exception e){
             System.out.println(e);
         }
         return res;
+    }
+
+    public int executePreparedQuery(String sql, CoupleValue[] params){
+        int nbMaj = 0;
+        try{
+            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
+            preparedStatement = this.addParametersToPreparedStatement(preparedStatement, params);
+            nbMaj = preparedStatement.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return nbMaj;
     }
 
     public void closeConn(){
