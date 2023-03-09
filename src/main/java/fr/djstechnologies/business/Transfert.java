@@ -3,7 +3,7 @@ package fr.djstechnologies.business;
 public class Transfert {
     private long id;
     private long idUser;
-    private long idBeneficiaire;
+    private Beneficiaire beneficiaire;
     long montant;
     private String codePromo;
     private String modeReception;
@@ -13,10 +13,10 @@ public class Transfert {
     public Transfert() {
     }
 
-    public Transfert(long id, long idUser, long idBeneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif) {
+    public Transfert(long id, long idUser, Beneficiaire beneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif) {
         this.id = id;
         this.idUser = idUser;
-        this.idBeneficiaire = idBeneficiaire;
+        this.beneficiaire = beneficiaire;
         this.montant = montant;
         this.codePromo = codePromo;
         this.modeReception = modeReception;
@@ -36,12 +36,12 @@ public class Transfert {
         this.idUser = idUser;
     }
 
-    public long getIdBeneficiaire() {
-        return idBeneficiaire;
+    public Beneficiaire getBeneficiaire() {
+        return beneficiaire;
     }
 
-    public void setIdBeneficiaire(long idBeneficiaire) {
-        this.idBeneficiaire = idBeneficiaire;
+    public void setBeneficiaire(Beneficiaire beneficiaire) {
+        this.beneficiaire = beneficiaire;
     }
 
     public long getMontant() {

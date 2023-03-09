@@ -30,7 +30,7 @@
     List<Transfert> transferts = transfertManager.getAll();
     for (Transfert t : transferts){
         out.println("<div id='transfert'>");
-        out.println("Beneficiaire Id : "+t.getIdBeneficiaire()+"<br>");
+        out.println("Beneficiaire : "+t.getBeneficiaire().getNomComplet()+"<br>");
         out.println("Montant : "+t.getMontant()+"<br>");
         out.println("Mode Reception : "+t.getModeReception()+"<br>");
         out.println("Operateur : "+t.getOperateur()+"<br>");

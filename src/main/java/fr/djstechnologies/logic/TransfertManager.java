@@ -1,5 +1,6 @@
 package fr.djstechnologies.logic;
 
+import fr.djstechnologies.business.Beneficiaire;
 import fr.djstechnologies.business.Transfert;
 import fr.djstechnologies.dal.CoupleValue;
 import fr.djstechnologies.dal.DataBaseManager;
@@ -18,7 +19,7 @@ public class TransfertManager {
     public void create(Transfert transfert){
         CoupleValue[] params = new CoupleValue[7];
         params[0] = new CoupleValue("Int",transfert.getIdUser());
-        params[1] = new CoupleValue("Int", transfert.getIdBeneficiaire());
+        params[1] = new CoupleValue("Int", transfert.getBeneficiaire().getId());
         params[2] = new CoupleValue("Int", transfert.getMontant());
         params[3] = new CoupleValue("String", transfert.getCodePromo());
         params[4] = new CoupleValue("String", transfert.getModeReception());
@@ -28,6 +29,7 @@ public class TransfertManager {
     }
 
     public List<Transfert> getAll(){
+        BeneficiaireManager beneficiaireManager = new BeneficiaireManager();
         List<Transfert> transferts = new ArrayList<>();
         try{
             ResultSet res = this.bdManager.executeSelect(TransfertConstant.SELECT_ALL);
@@ -35,6 +37,7 @@ public class TransfertManager {
                 int id;
                 int iduser;
                 int idbeneficiaire;
+                Beneficiaire beneficiaire;
                 int montant;
                 String codePromo;
                 String modeReception;
@@ -50,7 +53,8 @@ public class TransfertManager {
                     modeReception = res.getString(6);
                     operateur = res.getString(7);
                     motif = res.getString(8);
-                    transfert = new Transfert(id, (long) iduser, (long) idbeneficiaire, (long) montant, codePromo, modeReception, operateur, motif);
+                    beneficiaire = beneficiaireManager.selectById((long) idbeneficiaire);
+                    transfert = new Transfert(id, (long) iduser, beneficiaire , (long) montant, codePromo, modeReception, operateur, motif);
                     transferts.add(transfert);
                 }
             }

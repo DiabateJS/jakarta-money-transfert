@@ -22,6 +22,10 @@ public class Beneficiaire {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getNomComplet(){
         return this.nom + " " + this.prenom;
     }

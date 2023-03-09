@@ -1,5 +1,6 @@
 package fr.djstechnologies.servlet;
 
+import fr.djstechnologies.business.Beneficiaire;
 import fr.djstechnologies.business.Transfert;
 import fr.djstechnologies.business.User;
 import fr.djstechnologies.logic.TransfertManager;
@@ -25,7 +26,9 @@ public class TraiterTransfert extends HttpServlet {
         User connectUser = (User) request.getSession().getAttribute("userData");
         long idUser = connectUser.getId();
 
-        Transfert transfert = new Transfert(0, idUser, idBen, mt, codePromo, modeReception, operateur, motif);
+        Beneficiaire beneficiaire = new Beneficiaire();
+        beneficiaire.setId(Long.parseLong(idBeneficiaire));
+        Transfert transfert = new Transfert(0, idUser, beneficiaire, mt, codePromo, modeReception, operateur, motif);
         TransfertManager transfertManager = new TransfertManager();
         transfertManager.create(transfert);
 
