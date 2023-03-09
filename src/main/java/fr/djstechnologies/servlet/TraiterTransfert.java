@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/Envoyer")
-public class TraiterEnvoyer extends HttpServlet {
+@WebServlet("/Transfert")
+public class TraiterTransfert extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

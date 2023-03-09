@@ -16,7 +16,7 @@
 <br>
 <%@include file="entete.jsp" %>
 <br>
-<form action="Envoyer" method="post">
+<form action="Transfert" method="post">
     <h3>Transfert d'argent vers la CI</h3>
     <br>
     <label for="mode_reception">Mode Reception</label>
