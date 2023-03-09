@@ -44,6 +44,8 @@
             }
         %>
     </select><br>
+    <label for="motif">Motif</label>
+    <input type="text" name="motif" id="motif"><br>
     <input type="submit" value="Envoyer">
 </form>
 </body>

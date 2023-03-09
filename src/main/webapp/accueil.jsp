@@ -34,6 +34,7 @@
         out.println("Montant : "+t.getMontant()+"<br>");
         out.println("Mode Reception : "+t.getModeReception()+"<br>");
         out.println("Operateur : "+t.getOperateur()+"<br>");
+        out.println("Motif : "+t.getMotif()+"<br>");
         out.println("</div>");
     }
 %>

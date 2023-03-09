@@ -20,11 +20,12 @@ public class TraiterEnvoyer extends HttpServlet {
         String codePromo = request.getParameter("code_promo");
         String operateur = request.getParameter("operateur_telephonique");
         String idBeneficiaire = request.getParameter("beneficiaire");
+        String motif = request.getParameter("motif");
         long idBen = Long.parseLong(idBeneficiaire);
         User connectUser = (User) request.getSession().getAttribute("userData");
         long idUser = connectUser.getId();
 
-        Transfert transfert = new Transfert(0, idUser, idBen, mt, codePromo, modeReception, operateur);
+        Transfert transfert = new Transfert(0, idUser, idBen, mt, codePromo, modeReception, operateur, motif);
         TransfertManager transfertManager = new TransfertManager();
         transfertManager.create(transfert);
 

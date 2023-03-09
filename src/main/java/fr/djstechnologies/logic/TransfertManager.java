@@ -16,13 +16,14 @@ public class TransfertManager {
     }
 
     public void create(Transfert transfert){
-        CoupleValue[] params = new CoupleValue[6];
+        CoupleValue[] params = new CoupleValue[7];
         params[0] = new CoupleValue("Int",transfert.getIdUser());
         params[1] = new CoupleValue("Int", transfert.getIdBeneficiaire());
         params[2] = new CoupleValue("Int", transfert.getMontant());
         params[3] = new CoupleValue("String", transfert.getCodePromo());
         params[4] = new CoupleValue("String", transfert.getModeReception());
         params[5] = new CoupleValue("String", transfert.getOperateur());
+        params[6] = new CoupleValue("String", transfert.getMotif());
         this.bdManager.executePreparedQuery(TransfertConstant.CREATE, params);
     }
 
@@ -38,6 +39,7 @@ public class TransfertManager {
                 String codePromo;
                 String modeReception;
                 String operateur;
+                String motif;
                 Transfert transfert;
                 while(res.next()) {
                     id = res.getInt(1);
@@ -47,7 +49,8 @@ public class TransfertManager {
                     codePromo = res.getString(5);
                     modeReception = res.getString(6);
                     operateur = res.getString(7);
-                    transfert = new Transfert(id, (long) iduser, (long) idbeneficiaire, (long) montant, codePromo, modeReception, operateur);
+                    motif = res.getString(8);
+                    transfert = new Transfert(id, (long) iduser, (long) idbeneficiaire, (long) montant, codePromo, modeReception, operateur, motif);
                     transferts.add(transfert);
                 }
             }

@@ -8,11 +8,12 @@ public class Transfert {
     private String codePromo;
     private String modeReception;
     private String operateur;
+    private String motif;
 
     public Transfert() {
     }
 
-    public Transfert(long id, long idUser, long idBeneficiaire, long montant, String codePromo, String modeReception, String operateur) {
+    public Transfert(long id, long idUser, long idBeneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif) {
         this.id = id;
         this.idUser = idUser;
         this.idBeneficiaire = idBeneficiaire;
@@ -20,6 +21,7 @@ public class Transfert {
         this.codePromo = codePromo;
         this.modeReception = modeReception;
         this.operateur = operateur;
+        this.motif = motif;
     }
 
     public long getId() {
@@ -72,5 +74,13 @@ public class Transfert {
 
     public void setOperateur(String operateur) {
         this.operateur = operateur;
+    }
+
+    public String getMotif() {
+        return motif;
+    }
+
+    public void setMotif(String motif) {
+        this.motif = motif;
     }
 }
