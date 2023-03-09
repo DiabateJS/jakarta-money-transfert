@@ -1,7 +1,5 @@
 package fr.djstechnologies.logic;
 
-import com.mysql.cj.protocol.Resultset;
-import fr.djstechnologies.business.Beneficiaire;
 import fr.djstechnologies.business.Transfert;
 import fr.djstechnologies.dal.CoupleValue;
 import fr.djstechnologies.dal.DataBaseManager;

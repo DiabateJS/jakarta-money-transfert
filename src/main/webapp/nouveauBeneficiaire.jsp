@@ -23,8 +23,6 @@
   <input type="text" name="numero_mobile" id="numero_mobile"><br>
   <label for="ville">Ville</label>
   <input type="text" name="ville" id="ville"><br>
-  <label for="motif">Motif d'envoi</label>
-  <input type="text" name="motif" id="motif"><br>
   <input type="submit" value="Ajouter">
 </form>
 </body>

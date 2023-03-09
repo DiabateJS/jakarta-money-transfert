@@ -16,9 +16,8 @@ public class TraiterAjoutBeneficiaire extends HttpServlet {
         String prenom = request.getParameter("prenom");
         String numero = request.getParameter("numero_mobile");
         String ville = request.getParameter("ville");
-        String motif = request.getParameter("motif");
 
-        Beneficiaire beneficiaire = new Beneficiaire(0,nom, prenom, numero, ville, motif);
+        Beneficiaire beneficiaire = new Beneficiaire(0,nom, prenom, numero, ville);
         BeneficiaireManager benManager = new BeneficiaireManager();
         benManager.create(beneficiaire);
         request.getRequestDispatcher("beneficiaire.jsp").forward(request, response);

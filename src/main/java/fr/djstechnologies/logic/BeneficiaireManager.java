@@ -1,8 +1,6 @@
 package fr.djstechnologies.logic;
 
-import com.mysql.cj.protocol.Resultset;
 import fr.djstechnologies.business.Beneficiaire;
-import fr.djstechnologies.business.User;
 import fr.djstechnologies.dal.CoupleValue;
 import fr.djstechnologies.dal.DataBaseManager;
 
@@ -23,7 +21,6 @@ public class BeneficiaireManager {
         params[1] = new CoupleValue("String", beneficiaire.getPrenom());
         params[2] = new CoupleValue("String", beneficiaire.getNumero());
         params[3] = new CoupleValue("String", beneficiaire.getVille());
-        params[4] = new CoupleValue("String", beneficiaire.getMotif());
         this.bdManager.executePreparedQuery(BeneficiaireConstant.CREATE, params);
     }
 
@@ -37,7 +34,6 @@ public class BeneficiaireManager {
                 String prenom;
                 String numero;
                 String ville;
-                String motif;
                 Beneficiaire beneficiaire;
                 while(res.next()) {
                     id = res.getInt(1);
@@ -45,8 +41,7 @@ public class BeneficiaireManager {
                     prenom = res.getString(3);
                     numero = res.getString(4);
                     ville = res.getString(5);
-                    motif = res.getString(6);
-                    beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville, motif);
+                    beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville);
                     beneficiaires.add(beneficiaire);
                 }
             }
@@ -54,5 +49,30 @@ public class BeneficiaireManager {
             System.out.println(e);
         }
         return beneficiaires;
+    }
+
+    public Beneficiaire selectById(long idBeneficiaire){
+        CoupleValue[] params = new CoupleValue[1];
+        params[0] = new CoupleValue("Int",idBeneficiaire);
+        Beneficiaire beneficiaire = null;
+        try{
+            ResultSet res = this.bdManager.executePreparedSelect(BeneficiaireConstant.SELECT_BY_ID, params);
+            int id;
+            String nom;
+            String prenom;
+            String numero;
+            String ville;
+            while (res.next()){
+                id = res.getInt(1);
+                nom = res.getString(2);
+                prenom = res.getString(3);
+                numero = res.getString(4);
+                ville = res.getString(5);
+                beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return beneficiaire;
     }
 }
