@@ -22,13 +22,14 @@ public class TraiterTransfert extends HttpServlet {
         String operateur = request.getParameter("operateur_telephonique");
         String idBeneficiaire = request.getParameter("beneficiaire");
         String motif = request.getParameter("motif");
+        String statut = "EN_COURS";
         long idBen = Long.parseLong(idBeneficiaire);
         User connectUser = (User) request.getSession().getAttribute("userData");
         long idUser = connectUser.getId();
 
         Beneficiaire beneficiaire = new Beneficiaire();
         beneficiaire.setId(Long.parseLong(idBeneficiaire));
-        Transfert transfert = new Transfert(0, idUser, beneficiaire, mt, codePromo, modeReception, operateur, motif);
+        Transfert transfert = new Transfert(0, idUser, beneficiaire, mt, codePromo, modeReception, operateur, motif, statut);
         TransfertManager transfertManager = new TransfertManager();
         transfertManager.create(transfert);
 

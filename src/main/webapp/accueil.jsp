@@ -37,6 +37,7 @@
         out.println("<div class='card-block'>");
         out.println("<h4 class='card-title'>"+t.getBeneficiaire().getNomComplet()+"</h4>");
         out.println("<h5 class='card-subtitle text-muted'>"+t.getMontant()+"euros </h5>");
+        out.println("<span class='h5 badge bg-primary'>"+t.getStatut()+"</span>");
         out.println("<p class='card-text p-y-1'>");
         out.println("Mode Reception : "+t.getModeReception()+"<br>");
         out.println("Operateur : "+t.getOperateur()+"<br>");
