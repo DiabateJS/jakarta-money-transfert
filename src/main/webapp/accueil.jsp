@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/accueil_style.css">
 </head>
 <body>
+<div class="container">
 <%
     User currentUser = (User)session.getAttribute("userData");
 %>
@@ -26,7 +27,6 @@
 <br>
 <h3>Transferts récents</h3>
 <br>
-<div class="container">
     <div class="row">
 <%
     TransfertManager transfertManager = new TransfertManager();
