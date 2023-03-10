@@ -1,5 +1,6 @@
 package fr.djstechnologies.logic;
 
+import fr.djstechnologies.business.Profil;
 import fr.djstechnologies.business.User;
 import fr.djstechnologies.dal.CoupleValue;
 import fr.djstechnologies.dal.DataBaseManager;
@@ -27,13 +28,18 @@ public class UserManager {
                 String prenom;
                 String telephone;
                 String email;
+                Profil profil;
+                int idprofil;
+                ProfilManager profilManager = new ProfilManager();
                 while(res.next()) {
                     id = res.getInt(1);
                     nom = res.getString(2);
                     prenom = res.getString(3);
                     telephone = res.getString(6);
                     email = res.getString(7);
-                    authUser = new User(id, login, pwd, nom, prenom, telephone, email);
+                    idprofil = res.getInt(8);
+                    profil = profilManager.selectById(idprofil);
+                    authUser = new User(id, login, pwd, nom, prenom, telephone, email, profil);
                 }
             }
             this.bdManager.closeConn();

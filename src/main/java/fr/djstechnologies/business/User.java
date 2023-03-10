@@ -10,10 +10,12 @@ public class User {
     private String telephone;
     private String email;
 
+    private Profil profil;
+
     public User() {
     }
 
-    public User(long id, String login, String pwd, String nom, String prenom, String telephone, String email) {
+    public User(long id, String login, String pwd, String nom, String prenom, String telephone, String email, Profil profil) {
         this.id = id;
         this.login = login;
         this.pwd = pwd;
@@ -21,6 +23,7 @@ public class User {
         this.prenom = prenom;
         this.telephone = telephone;
         this.email = email;
+        this.profil = profil;
     }
 
     public String getNomComplet(){
@@ -79,6 +82,14 @@ public class User {
         this.email = email;
     }
 
+    public Profil getProfil() {
+        return profil;
+    }
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -89,6 +100,7 @@ public class User {
                 ", prenom='" + prenom + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
+                ", profil=" + profil +
                 '}';
     }
 }
