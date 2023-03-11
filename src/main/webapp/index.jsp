@@ -27,7 +27,7 @@
                 </button>
             </form>
             <div class="social-login">
-                <h3>log in via</h3>
+                <a href="inscription.jsp"><h3>Inscription</h3></a>
                 <div class="social-icons">
                     <a href="#" class="social-login__icon fab fa-instagram"></a>
                     <a href="#" class="social-login__icon fab fa-facebook"></a>

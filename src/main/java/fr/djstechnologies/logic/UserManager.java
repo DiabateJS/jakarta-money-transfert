@@ -42,11 +42,22 @@ public class UserManager {
                     authUser = new User(id, login, pwd, nom, prenom, telephone, email, profil);
                 }
             }
-            this.bdManager.closeConn();
         }catch (Exception e){
             System.out.println(e);
         }
         return authUser;
 
+    }
+
+    public void create(User user){
+        CoupleValue[] params = new CoupleValue[7];
+        params[0] = new CoupleValue("String", user.getNom());
+        params[1] = new CoupleValue("String", user.getPrenom());
+        params[2] = new CoupleValue("String", user.getLogin());
+        params[3] = new CoupleValue("String", user.getPwd());
+        params[4] = new CoupleValue("String", user.getTelephone());
+        params[5] = new CoupleValue("String", user.getEmail());
+        params[6] = new CoupleValue("String", user.getProfil().getLibelle());
+        int res = this.bdManager.executePreparedQuery(UserConstant.CREATE_USER, params);
     }
 }
