@@ -66,4 +66,40 @@ public class TransfertManager {
         }
         return transferts;
     }
+
+    public List<Transfert> selectByUserId(int userid){
+        List<Transfert> transferts = new ArrayList<>();
+        try{
+            CoupleValue[] params = new CoupleValue[1];
+            params[0] = new CoupleValue("Int", userid);
+            ResultSet res = this.bdManager.executePreparedSelect(TransfertConstant.SELECT_TRANSFERTS_BY_USERID, params);
+            BeneficiaireManager beneficiaireManager = new BeneficiaireManager();
+            int id;
+            int idbeneficiaire;
+            Beneficiaire beneficiaire;
+            int montant;
+            String codePromo;
+            String modeReception;
+            String operateur;
+            String motif;
+            String statut;
+            Transfert transfert;
+            while (res.next()){
+                id = res.getInt(1);
+                idbeneficiaire = res.getInt(2);
+                beneficiaire = beneficiaireManager.selectById(idbeneficiaire);
+                montant = res.getInt(3);
+                codePromo = res.getString(4);
+                modeReception = res.getString(5);
+                operateur = res.getString(6);
+                motif = res.getString(7);
+                statut = res.getString(8);
+                transfert = new Transfert(id, userid, beneficiaire, montant, codePromo, modeReception, operateur, motif, statut);
+                transferts.add(transfert);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return transferts;
+    }
 }

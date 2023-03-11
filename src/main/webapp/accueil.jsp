@@ -17,20 +17,17 @@
 </head>
 <body>
 <div class="container">
-<%
-    User currentUser = (User)session.getAttribute("userData");
-%>
 <br>
 <%@include file="entete.jsp" %>
 <br>
-<h2>Bienvenu <%= currentUser.getNomComplet() %> !</h2>
+<h2>Bienvenu <%= conUser.getNomComplet() %> !</h2>
 <br>
 <h3>Transferts récents</h3>
 <br>
     <div class="row">
 <%
     TransfertManager transfertManager = new TransfertManager();
-    List<Transfert> transferts = transfertManager.getAll();
+    List<Transfert> transferts = transfertManager.selectByUserId((int)conUser.getId());
     for (Transfert t : transferts){
         out.println("<div class='col-md-4'>");
         out.println("<div class='card'>");
