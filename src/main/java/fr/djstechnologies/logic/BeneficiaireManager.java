@@ -21,6 +21,7 @@ public class BeneficiaireManager {
         params[1] = new CoupleValue("String", beneficiaire.getPrenom());
         params[2] = new CoupleValue("String", beneficiaire.getNumero());
         params[3] = new CoupleValue("String", beneficiaire.getVille());
+        params[4] =new CoupleValue("Int", beneficiaire.getUserId());
         this.bdManager.executePreparedQuery(BeneficiaireConstant.CREATE, params);
     }
 
@@ -34,6 +35,7 @@ public class BeneficiaireManager {
                 String prenom;
                 String numero;
                 String ville;
+                int userId;
                 Beneficiaire beneficiaire;
                 while(res.next()) {
                     id = res.getInt(1);
@@ -41,9 +43,37 @@ public class BeneficiaireManager {
                     prenom = res.getString(3);
                     numero = res.getString(4);
                     ville = res.getString(5);
-                    beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville);
+                    userId = res.getInt(6);
+                    beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville, userId);
                     beneficiaires.add(beneficiaire);
                 }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return beneficiaires;
+    }
+
+    public List<Beneficiaire> selectByUserId(long userId){
+        List<Beneficiaire> beneficiaires = new ArrayList<>();
+        CoupleValue[] params = new CoupleValue[1];
+        params[0] = new CoupleValue("Int", userId);
+        try{
+            ResultSet res = this.bdManager.executePreparedSelect(BeneficiaireConstant.SELECT_BY_USER_ID, params);
+            int id;
+            String nom;
+            String prenom;
+            String numero;
+            String ville;
+            Beneficiaire beneficiaire;
+            while (res.next()){
+                id = res.getInt(1);
+                nom = res.getString(2);
+                prenom = res.getString(3);
+                numero = res.getString(4);
+                ville = res.getString(5);
+                beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville, userId);
+                beneficiaires.add(beneficiaire);
             }
         }catch(Exception e){
             System.out.println(e);
@@ -62,13 +92,15 @@ public class BeneficiaireManager {
             String prenom;
             String numero;
             String ville;
+            int userId;
             while (res.next()){
                 id = res.getInt(1);
                 nom = res.getString(2);
                 prenom = res.getString(3);
                 numero = res.getString(4);
                 ville = res.getString(5);
-                beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville);
+                userId = res.getInt(6);
+                beneficiaire = new Beneficiaire(id, nom, prenom, numero, ville, userId);
             }
         }catch(Exception e){
             System.out.println(e);

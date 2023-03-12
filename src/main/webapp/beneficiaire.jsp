@@ -23,7 +23,7 @@
 <ul class="list-group">
 <%
     BeneficiaireManager benManager = new BeneficiaireManager();
-    List<Beneficiaire> beneficiaires = benManager.getAll();
+    List<Beneficiaire> beneficiaires = benManager.selectByUserId(conUser.getId());
     out.println("<li class='list-group-item active' aria-current='true'>Bénéficiaires</li>");
     for (Beneficiaire b : beneficiaires){
         out.println("<li class='list-group-item'>"+b.getNomComplet()+"</li>");

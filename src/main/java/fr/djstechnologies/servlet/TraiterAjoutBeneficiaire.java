@@ -1,6 +1,7 @@
 package fr.djstechnologies.servlet;
 
 import fr.djstechnologies.business.Beneficiaire;
+import fr.djstechnologies.business.User;
 import fr.djstechnologies.logic.BeneficiaireManager;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,8 +17,9 @@ public class TraiterAjoutBeneficiaire extends HttpServlet {
         String prenom = request.getParameter("prenom");
         String numero = request.getParameter("numero_mobile");
         String ville = request.getParameter("ville");
+        User conUser = (User) request.getSession().getAttribute("userData");
 
-        Beneficiaire beneficiaire = new Beneficiaire(0,nom, prenom, numero, ville);
+        Beneficiaire beneficiaire = new Beneficiaire(0,nom, prenom, numero, ville, conUser.getId());
         BeneficiaireManager benManager = new BeneficiaireManager();
         benManager.create(beneficiaire);
         request.getRequestDispatcher("beneficiaire.jsp").forward(request, response);

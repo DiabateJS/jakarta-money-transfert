@@ -6,16 +6,18 @@ public class Beneficiaire {
     private String prenom;
     private String numero;
     private String ville;
+    private long userId;
 
     public Beneficiaire() {
     }
 
-    public Beneficiaire(long id, String nom, String prenom, String numero, String ville) {
+    public Beneficiaire(long id, String nom, String prenom, String numero, String ville, long userId) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.numero = numero;
         this.ville = ville;
+        this.userId = userId;
     }
 
     public long getId() {
@@ -60,5 +62,13 @@ public class Beneficiaire {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }
