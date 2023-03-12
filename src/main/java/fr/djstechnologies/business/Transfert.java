@@ -10,11 +10,12 @@ public class Transfert {
     private String operateur;
     private String motif;
     private String statut;
+    private long idOperateur;
 
     public Transfert() {
     }
 
-    public Transfert(long id, long idUser, Beneficiaire beneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif, String statut) {
+    public Transfert(long id, long idUser, Beneficiaire beneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif, String statut, long idOperateur) {
         this.id = id;
         this.idUser = idUser;
         this.beneficiaire = beneficiaire;
@@ -24,6 +25,7 @@ public class Transfert {
         this.operateur = operateur;
         this.motif = motif;
         this.statut = statut;
+        this.idOperateur = idOperateur;
     }
 
     public long getId() {
@@ -92,5 +94,13 @@ public class Transfert {
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public long getIdOperateur() {
+        return idOperateur;
+    }
+
+    public void setIdOperateur(long idOperateur) {
+        this.idOperateur = idOperateur;
     }
 }

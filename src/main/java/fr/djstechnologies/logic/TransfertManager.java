@@ -17,7 +17,7 @@ public class TransfertManager {
     }
 
     public void create(Transfert transfert){
-        CoupleValue[] params = new CoupleValue[8];
+        CoupleValue[] params = new CoupleValue[9];
         params[0] = new CoupleValue("Int",transfert.getIdUser());
         params[1] = new CoupleValue("Int", transfert.getBeneficiaire().getId());
         params[2] = new CoupleValue("Int", transfert.getMontant());
@@ -26,6 +26,7 @@ public class TransfertManager {
         params[5] = new CoupleValue("String", transfert.getOperateur());
         params[6] = new CoupleValue("String", transfert.getMotif());
         params[7] = new CoupleValue("String", transfert.getStatut());
+        params[8] = new CoupleValue("Int", transfert.getIdOperateur());
         this.bdManager.executePreparedQuery(TransfertConstant.CREATE, params);
     }
 
@@ -45,6 +46,7 @@ public class TransfertManager {
                 String operateur;
                 String motif;
                 String statut;
+                int idOperateur;
                 Transfert transfert;
                 while(res.next()) {
                     id = res.getInt(1);
@@ -56,8 +58,9 @@ public class TransfertManager {
                     operateur = res.getString(7);
                     motif = res.getString(8);
                     statut = res.getString(9);
+                    idOperateur = res.getInt(10);
                     beneficiaire = beneficiaireManager.selectById((long) idbeneficiaire);
-                    transfert = new Transfert(id, (long) iduser, beneficiaire , (long) montant, codePromo, modeReception, operateur, motif, statut);
+                    transfert = new Transfert(id, (long) iduser, beneficiaire , (long) montant, codePromo, modeReception, operateur, motif, statut, (long) idOperateur);
                     transferts.add(transfert);
                 }
             }
@@ -83,6 +86,7 @@ public class TransfertManager {
             String operateur;
             String motif;
             String statut;
+            int idOperateur;
             Transfert transfert;
             while (res.next()){
                 id = res.getInt(1);
@@ -94,7 +98,47 @@ public class TransfertManager {
                 operateur = res.getString(6);
                 motif = res.getString(7);
                 statut = res.getString(8);
-                transfert = new Transfert(id, userid, beneficiaire, montant, codePromo, modeReception, operateur, motif, statut);
+                idOperateur = res.getInt(9);
+                transfert = new Transfert(id, userid, beneficiaire, montant, codePromo, modeReception, operateur, motif, statut, idOperateur);
+                transferts.add(transfert);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return transferts;
+    }
+
+    public List<Transfert> selectWithoutOperators(){
+        List<Transfert> transferts = new ArrayList<>();
+        String sql = "select id, iduser, idbeneficiaire, montant, codepromo, modereception, operateur, motif, statut from transfert where idoperateur = NULL OR idoperateur = 0";
+        try{
+            ResultSet res = this.bdManager.executeSelect(sql);
+            BeneficiaireManager beneficiaireManager = new BeneficiaireManager();
+            int id;
+            int userId;
+            int idbeneficiaire;
+            Beneficiaire beneficiaire;
+            int montant;
+            String codePromo;
+            String modeReception;
+            String operateur;
+            String motif;
+            String statut;
+            int idOperateur;
+            Transfert transfert;
+            while (res.next()){
+                id = res.getInt(1);
+                userId = res.getInt(2);
+                idbeneficiaire = res.getInt(3);
+                beneficiaire = beneficiaireManager.selectById(idbeneficiaire);
+                montant = res.getInt(4);
+                codePromo = res.getString(5);
+                modeReception = res.getString(6);
+                operateur = res.getString(7);
+                motif = res.getString(8);
+                statut = res.getString(9);
+                idOperateur = 0;
+                transfert = new Transfert(id, userId, beneficiaire, montant, codePromo, modeReception, operateur, motif, statut, idOperateur);
                 transferts.add(transfert);
             }
         }catch (Exception e){

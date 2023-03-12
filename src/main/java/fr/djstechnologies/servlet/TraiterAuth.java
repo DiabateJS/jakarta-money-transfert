@@ -1,5 +1,6 @@
 package fr.djstechnologies.servlet;
 
+import fr.djstechnologies.business.Profil;
 import fr.djstechnologies.business.User;
 import fr.djstechnologies.logic.UserManager;
 import jakarta.servlet.ServletException;
@@ -22,8 +23,13 @@ public class TraiterAuth extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (userAuth != null){
+            Profil profil = userAuth.getProfil();
             session.setAttribute("userData",userAuth);
-            req.getRequestDispatcher("accueil.jsp").forward(req, resp);
+            String page = "accueil.jsp";
+            if (profil.getLibelle().equals("operateur")){
+                page = "operateur.jsp";
+            }
+            req.getRequestDispatcher(page).forward(req, resp);
         }else{
             session.setAttribute("msgError","Login ou Mot de passe incorrecte");
             req.getRequestDispatcher("index.jsp").forward(req, resp);
