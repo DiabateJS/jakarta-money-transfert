@@ -2,7 +2,6 @@ package fr.djstechnologies.servlet;
 
 import fr.djstechnologies.business.Profil;
 import fr.djstechnologies.business.User;
-import fr.djstechnologies.logic.ProfilManager;
 import fr.djstechnologies.logic.UserManager;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -24,6 +23,7 @@ public class TraiterModifUserInfo extends HttpServlet {
         User user = new User(id, login, null, nom, prenom, numero, email, new Profil());
         UserManager userManager = new UserManager();
         userManager.update(user);
+        request.getSession().setAttribute("userData", userManager.selectById(id));
         request.getRequestDispatcher("profil.jsp").forward(request, response);
     }
 }

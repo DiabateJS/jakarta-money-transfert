@@ -5,5 +5,11 @@
         User conUser = (User) request.getSession().getAttribute("userData");
     %>
     Utilisateur : <%= conUser.getPrenom() %>  - <a href="profil.jsp">Profil</a> - <a href="deconnexion.jsp">Déconnexion</a> <br>
-    <a href="accueil.jsp">Accueil</a> - <a href="transfert.jsp">Transferts</a> - <a href="beneficiaire.jsp">Bénéficiaire</a> - <a href="#">Aide</a>
+    <a href="accueil.jsp">Accueil</a> - <a href="transfert.jsp">Transferts</a> - <a href="beneficiaire.jsp">Bénéficiaire</a>
+    <%
+        if (conUser.getProfil().getLibelle().equals("admin")){
+            out.println("- <a href='administration.jsp'>Administration</a> ");
+        }
+    %>
+    - <a href="#">Aide</a>
 </div>
