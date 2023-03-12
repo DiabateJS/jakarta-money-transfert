@@ -60,4 +60,15 @@ public class UserManager {
         params[6] = new CoupleValue("String", user.getProfil().getLibelle());
         int res = this.bdManager.executePreparedQuery(UserConstant.CREATE_USER, params);
     }
+
+    public void update(User user){
+        CoupleValue[] params = new CoupleValue[6];
+        params[0] = new CoupleValue("String", user.getNom());
+        params[1] = new CoupleValue("String", user.getPrenom());
+        params[2] = new CoupleValue("String", user.getLogin());
+        params[3] = new CoupleValue("String", user.getTelephone());
+        params[4] = new CoupleValue("String", user.getEmail());
+        params[5] = new CoupleValue("Int", user.getId());
+        int res = this.bdManager.executePreparedQuery(UserConstant.UPDATE_USER, params);
+    }
 }

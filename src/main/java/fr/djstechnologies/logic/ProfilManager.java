@@ -51,4 +51,21 @@ public class ProfilManager {
         }
         return profil;
     }
+
+    public Profil selectByLibelle(String libelle){
+        CoupleValue[] params = new CoupleValue[1];
+        params[0] = new CoupleValue("String", libelle);
+        Profil profil = null;
+        try{
+            ResultSet res = this.bdManager.executePreparedSelect(ProfilConstant.SELECT_BY_LIBELLE, params);
+            int id;
+            while (res.next()){
+                id = res.getInt(1);
+                profil = new Profil(id, libelle);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return profil;
+    }
 }

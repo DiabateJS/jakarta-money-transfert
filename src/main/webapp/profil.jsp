@@ -16,6 +16,7 @@
     <br>
     <%@include file="entete.jsp" %>
     <br>
+    <a href="modif_user_info.jsp">Modifier Info</a><br>
     Profil : <b><%= conUser.getProfil().getLibelle() %></b><br>
     Login : <%= conUser.getLogin() %><br>
     Nom : <%= conUser.getNom()%> <br>
