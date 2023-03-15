@@ -37,7 +37,7 @@
         out.println("<span class='h5 badge bg-primary'>"+t.getStatut()+"</span>");
         out.println("<p class='card-text p-y-1'>");
         out.println("Mode Reception : "+t.getModeReception()+"<br>");
-        out.println("Operateur : "+t.getOperateur()+"<br>");
+        out.println("Operateur Mobile : "+t.getOperateurMobile()+"<br>");
         out.println("Motif : "+t.getMotif());
         out.println("</p>");
         out.println("<a href='#' class='card-link'>link</a> ");

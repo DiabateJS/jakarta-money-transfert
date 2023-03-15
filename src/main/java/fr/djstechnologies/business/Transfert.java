@@ -2,12 +2,12 @@ package fr.djstechnologies.business;
 
 public class Transfert {
     private long id;
-    private long idUser;
+    private User user;
     private Beneficiaire beneficiaire;
     long montant;
     private String codePromo;
     private String modeReception;
-    private String operateur;
+    private String operateurMobile;
     private String motif;
     private String statut;
     private long idOperateur;
@@ -15,14 +15,14 @@ public class Transfert {
     public Transfert() {
     }
 
-    public Transfert(long id, long idUser, Beneficiaire beneficiaire, long montant, String codePromo, String modeReception, String operateur, String motif, String statut, long idOperateur) {
+    public Transfert(long id, User user, Beneficiaire beneficiaire, long montant, String codePromo, String modeReception, String operateurMobile, String motif, String statut, long idOperateur) {
         this.id = id;
-        this.idUser = idUser;
+        this.user = user;
         this.beneficiaire = beneficiaire;
         this.montant = montant;
         this.codePromo = codePromo;
         this.modeReception = modeReception;
-        this.operateur = operateur;
+        this.operateurMobile = operateurMobile;
         this.motif = motif;
         this.statut = statut;
         this.idOperateur = idOperateur;
@@ -32,12 +32,12 @@ public class Transfert {
         return id;
     }
 
-    public long getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(long idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Beneficiaire getBeneficiaire() {
@@ -72,12 +72,12 @@ public class Transfert {
         this.modeReception = modeReception;
     }
 
-    public String getOperateur() {
-        return operateur;
+    public String getOperateurMobile() {
+        return operateurMobile;
     }
 
-    public void setOperateur(String operateur) {
-        this.operateur = operateur;
+    public void setOperateurMobile(String operateurMobile) {
+        this.operateurMobile = operateurMobile;
     }
 
     public String getMotif() {

@@ -42,14 +42,14 @@
     List<Transfert> transferts = transfertManager.selectWithoutOperators();
     for (Transfert t : transferts){
       out.print("<tr>");
-      out.print("<td>"+t.getIdUser()+"</td>");
+      out.print("<td>"+t.getUser().getNomComplet()+"</td>");
       out.print("<td>"+t.getBeneficiaire().getNomComplet()+"</td>");
       out.print("<td>"+t.getMontant()+"</td>");
       out.print("<td>"+t.getModeReception()+"</td>");
-      out.print("<td>"+t.getOperateur()+"</td>");
+      out.print("<td>"+t.getOperateurMobile()+"</td>");
       out.print("<td>"+t.getMotif()+"</td>");
       out.print("<td>"+t.getStatut()+"</td>");
-      out.print("<td><a href='#' class='btn btn-primary'>Changer Statut</a></td>");
+      out.print("<td><a href='affecter_transfert.jsp?id="+t.getId()+"' class='btn btn-primary'>M'affecter</a></td>");
       out.print("</tr>");
       out.println("");
     }
@@ -57,6 +57,8 @@
     </tbody>
   </table>
   <br>
+  <br>
+  <h3>Transfert en cours de traitement</h3>
   <br>
   <h3>Transferts traités</h3>
   <br>

@@ -19,7 +19,7 @@ public class TraiterTransfert extends HttpServlet {
         String montant = request.getParameter("montant");
         Long mt = Long.parseLong(montant);
         String codePromo = request.getParameter("code_promo");
-        String operateur = request.getParameter("operateur_telephonique");
+        String operateurMobile = request.getParameter("operateur_telephonique");
         String idBeneficiaire = request.getParameter("beneficiaire");
         String motif = request.getParameter("motif");
         String statut = "EN_COURS";
@@ -30,7 +30,9 @@ public class TraiterTransfert extends HttpServlet {
 
         Beneficiaire beneficiaire = new Beneficiaire();
         beneficiaire.setId(Long.parseLong(idBeneficiaire));
-        Transfert transfert = new Transfert(0, idUser, beneficiaire, mt, codePromo, modeReception, operateur, motif, statut, idOperateur);
+        User user = new User();
+        user.setId(idUser);
+        Transfert transfert = new Transfert(0, user, beneficiaire, mt, codePromo, modeReception, operateurMobile, motif, statut, idOperateur);
         TransfertManager transfertManager = new TransfertManager();
         transfertManager.create(transfert);
 
