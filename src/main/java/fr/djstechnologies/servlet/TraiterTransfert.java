@@ -27,12 +27,14 @@ public class TraiterTransfert extends HttpServlet {
         User connectUser = (User) request.getSession().getAttribute("userData");
         long idUser = connectUser.getId();
         long idOperateur = 0;
+        User operateur = new User();
+        operateur.setId(idOperateur);
 
         Beneficiaire beneficiaire = new Beneficiaire();
-        beneficiaire.setId(Long.parseLong(idBeneficiaire));
+        beneficiaire.setId(idBen);
         User user = new User();
         user.setId(idUser);
-        Transfert transfert = new Transfert(0, user, beneficiaire, mt, codePromo, modeReception, operateurMobile, motif, statut, idOperateur);
+        Transfert transfert = new Transfert(0, user, beneficiaire, mt, codePromo, modeReception, operateurMobile, motif, statut, operateur);
         TransfertManager transfertManager = new TransfertManager();
         transfertManager.create(transfert);
 

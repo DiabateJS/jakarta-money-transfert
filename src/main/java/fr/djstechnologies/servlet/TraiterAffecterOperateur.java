@@ -19,7 +19,7 @@ public class TraiterAffecterOperateur extends HttpServlet {
         TransfertManager transfertManager = new TransfertManager();
         Transfert transfert = transfertManager.selectById(transfertId);
         transfert.setStatut("ATTENTE_VALIDATION");
-        transfert.setIdOperateur(conUser.getId());
+        transfert.getOperateur().setId(conUser.getId());
         transfertManager.update(transfert);
         request.getRequestDispatcher("operateur.jsp").forward(request, response);
     }
